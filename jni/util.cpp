@@ -1,6 +1,6 @@
 #include "util.hh"
 
-void AttachConsole() {
+void AllocateConsole() {
     if (!AllocConsole()) {
         std::cerr << "Failed to allocate console: " << GetLastError() << std::endl;
         return;
@@ -66,4 +66,12 @@ void printUnchangedClasses(const std::map<std::string, int>& currentValues) {
             std::cout << className << std::endl;
         }
     }
+}
+
+bool containsIgnoreCase(const std::string& str, const std::string& substr) {
+    std::string strLower = str;
+    std::string substrLower = substr;
+    std::transform(strLower.begin(), strLower.end(), strLower.begin(), ::tolower);
+    std::transform(substrLower.begin(), substrLower.end(), substrLower.begin(), ::tolower);
+    return strLower.find(substrLower) != std::string::npos;
 }

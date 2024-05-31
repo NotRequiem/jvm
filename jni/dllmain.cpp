@@ -16,13 +16,13 @@ BOOL __stdcall DllMain(HMODULE hModule,
         int analysisChoice = MessageBoxA(nullptr, "Do you want to analyze memory for loaded Java objects?", "Analysis Mode", MB_ICONQUESTION | MB_YESNO);
 
         if (analysisChoice == IDYES) {
-            AttachConsole();
+            AllocateConsole();
             AnalyzeMemory();
         }
         else if (monitoringChoice == IDYES) {
-            AttachConsole();
+            AllocateConsole();
 
-            std::cout << "Monitoring memory..." << std::endl;
+            std::cout << "Monitoring memory. Waiting for memory changes...\n";
             while (true) {
                 std::map<std::string, int> currentValues;
                 MonitorMemory(currentValues);
@@ -35,6 +35,7 @@ BOOL __stdcall DllMain(HMODULE hModule,
                     }
                 }
 
+                Sleep(5000);
                 previousValues = std::move(currentValues);
             }
         }

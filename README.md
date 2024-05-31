@@ -8,21 +8,35 @@ Internal module designed for debugging and analyzing JVM memory.
 
 3.) When injected into a process running inside a Java virtual machine, the module will ask you if you want to:
 
-1. Monitor memory for changes (Java classes changing its memory contents), which will:
+1. Monitor the JVM memory, which will:
    
-   1.1 Classes that were modified
+   1.1 Monitor and detect classes that were modified in memory infinitely
    
-   1.2 Old memory value in negative decimal representation and new (current) memory value
+   1.2 Print old memory values in negative decimal representation and new (current) memory values
    
-   1.3 Print every loaded class that were not modified after pressing the DELETE key
+   1.3 Stop the monitoring process and print every loaded class that were not modified after pressing the DELETE key
   
 ![imgmonitor](img/monitor_mode.png) 
 
-2. Analyze the memory of the JVM internally to retrieve classes, its memory locations in the JVM and its memory contents
+   2. Analyze the memory of the JVM internally, which will:
    
-   If you build the module in Debug mode, the algorithm will also scan for loaded java methods and objects (fields)
+   2.1 Detect loaded classes in memory
+   
+   2.2 Detect loaded methods in memory
+   
+   2.3 Detect loaded fields in memory
+   
+   2.4 Detect loaded signatures in memory
+   
+   2.5 Locate the memory locations of each loaded class in the JVM virtual space
+   
+   2.6 Read the memory contents of each loaded class
+   
+   *The module will ask you if you want to analyze specific names of a class, a method or a field*
 
 ![imganalysis](img/analysis_mode.png) 
+
+
 
 **Note 1:** In every program with an allocated console, closing it it's effectively the same as sending a Cntl + C command input to the window, and therefore closing the Java program where the module is injected
 
